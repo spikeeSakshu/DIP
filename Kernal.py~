@@ -17,16 +17,15 @@ def EdgeDetection(img):
        C=c)
     return img_edge
 
-def Cartoonize(img_rgb):
+def Cartoonize(img_color):
     num_down=1
     num_bilateral = 5 # number of bilateral filtering steps
     
     # downsample image using Gaussian pyramid
-    img_color = img_rgb
     for _ in range(num_down):
         img_color = cv2.pyrDown(img_color)
     for _ in range(num_bilateral):
-        img_color = cv2.bilateralFilter(img_color, d=9, sigmaColor=9, sigmaSpace=7)
+        img_color = cv2.bilateralFilter(img_rgb, d=9, sigmaColor=9, sigmaSpace=7)
     for _ in range(num_down):
         img_color = cv2.pyrUp(img_color)
 
@@ -55,9 +54,25 @@ def Blur(img):
     return blurred
     
 # display
-img = cv2.imread("4.jpg")
+img = cv2.imread("3.jpg")
 
-cv2.imshow('as',Cartoonize(img))#row=0, col=0
-cv2.waitKey(0)
+fig, ax = plt.subplots(nrows=3,ncols=2, figsize=(10,10))
+ax[0][0].imshow(img, vmin=0, vmax=255)#row=0, col=0
+ax[0][0].set_title("Original Image")
 
+
+ax[0][1].imshow(Blur(img), vmin=0, vmax=255)#row=0, col=1
+ax[0][1].set_title("Blured Image")
+
+ax[1][0].imshow(Sharpen(img), vmin=0, vmax=255)#row=0, col=0
+ax[1][0].set_title("Sharpen Image")
+
+
+ax[1][1].imshow(Cartoonize(img), vmin=0, vmax=255)#row=0, col=1
+ax[1][1].set_title("Cartoonized Image")
+
+ax[2][0].imshow(EdgeDetection(img,15,3), vmin=0, vmax=255)#row=0, col=0
+ax[2][0].set_title("Edges")
+
+plt.show()
 
