@@ -14,6 +14,26 @@
   
 
     <title>Result</title>
+<style>
+.row {
+  display: flex;
+}
+
+.column {
+  flex: 33.33%;
+  padding: 5px;
+}
+
+.container{
+text-align: center;
+}
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -34,13 +54,20 @@
     </nav>
 
 
-    <div class="container">
-        <h1>Result</h1>
-        <!-- <img src="{{image_file}}" class="img-fluid" alt="Responsive image"> -->
-        <img src="/static/uploads/result.png" class="img-fluid" alt="Responsive image"> 
-
+<div class="row">
+    <div class="column">
+    	<div class="container">
+        	<h1>Original Image</h1>
+		<img src="/static/uploads/image.png" class="img-fluid" alt="Responsive image">
+    	</div>
     </div>
-
+    <div class="column">
+    	<div class="container">
+        	<h1>Final Image</h1>
+		<img src="/static/uploads/result.png" class="img-fluid" alt="Responsive image">
+    	</div>
+    </div>
+</div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

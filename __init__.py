@@ -43,13 +43,13 @@ def hello():
             return redirect(request.url)
         if file and allowed_file(file.filename):
             filename = file.filename
-            file.save(os.path.join(app.root_path, 'static/uploads/', 'result.png'))
+            file.save(os.path.join(app.root_path, 'static/uploads/', 'image.png'))
 
     return render_template('home.html')
 
 @app.route("/about")
 def about():
-    #return "Made by Kirtan and Tim."
+    
     return render_template('about.html')
 
 @app.route("/result", methods=['GET', 'POST'])
@@ -72,20 +72,22 @@ def result():
             #flash('No file part')
             return redirect(request.url)
         file = request.files['file']
+
         # if user does not select file, browser also
         # submit an empty part without filename
         if file.filename == '':
             #flash('No selected file')
             return redirect(request.url)
+
         if file and allowed_file(file.filename):
             print("here")
             imageSelected = True
             filename = file.filename
-            file.save(os.path.join(app.root_path, 'static/uploads/', 'result.png'))
+            file.save(os.path.join(app.root_path, 'static/uploads/', 'image.png'))
 
 
     if imageSelected:
-        photo = io.imread( 'static/uploads/result.png' )
+        photo = io.imread( 'static/uploads/image.png' )
     else:
         photo = io.imread( 'uploads/Jeff_Ames.png' )
 
@@ -103,7 +105,7 @@ def result():
     photo = test(photo)
 
 
-    #photo = filters.glassDoor(photo)
+   
     scipy.misc.imsave('static/uploads/result.png', photo)
 
     return render_template('result.html')

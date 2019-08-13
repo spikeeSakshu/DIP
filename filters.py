@@ -33,7 +33,7 @@ def cartoon(img_rgb):
        cv2.ADAPTIVE_THRESH_MEAN_C,
        cv2.THRESH_BINARY,
        blockSize=11,
-       C=4)
+       C=6)
     
     img_edge = cv2.cvtColor(img_edge, cv2.COLOR_GRAY2RGB)
     
